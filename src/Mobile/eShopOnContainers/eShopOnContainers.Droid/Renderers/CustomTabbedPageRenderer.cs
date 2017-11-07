@@ -21,7 +21,7 @@ namespace eShopOnContainers.Droid.Renderers
         private const int DeleayBeforeTabAdded = 10;
         protected readonly Dictionary<Element, BadgeView> BadgeViews = new Dictionary<Element, BadgeView>();
         private TabLayout _tabLayout;
-        private TabLayout.SlidingTabStrip _tabStrip;
+        private LinearLayout _tabStrip;
         private ViewPager _viewPager;
         private TabbedPage _tabbedPage;
         private bool _firstTime = true;
@@ -64,7 +64,7 @@ namespace eShopOnContainers.Droid.Renderers
                 }
             };
 
-            _tabStrip = _tabLayout.FindChildOfType<TabLayout.SlidingTabStrip>();
+            _tabStrip = _tabLayout.FindChildOfType<LinearLayout>();
 
             for (var i = 0; i < _tabLayout.TabCount; i++)
             {

@@ -23,7 +23,7 @@ namespace eShopOnContainers
 
             InitApp();
 
-			if (Device.RuntimePlatform == Device.Windows)
+			if (Device.RuntimePlatform == "Windows")
             {
                 InitNavigation();
             }
@@ -46,7 +46,7 @@ namespace eShopOnContainers
         {
             base.OnStart();
 
-			if (Device.RuntimePlatform != Device.Windows)
+			if (Device.RuntimePlatform != "Windows")
             {
                 await InitNavigation();
             }
@@ -75,7 +75,7 @@ namespace eShopOnContainers
 
             if (locator.IsGeolocationEnabled && locator.IsGeolocationAvailable)
             { 
-                locator.AllowsBackgroundUpdates = true;
+                //locator.AllowsBackgroundUpdates = true;
                 locator.DesiredAccuracy = 50;
 
                 var position = await locator.GetPositionAsync();

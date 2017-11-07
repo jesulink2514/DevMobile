@@ -152,18 +152,6 @@
                         Text="REGISTER"
                         TextColor="Gray"/>
                 </Grid>
-                <StackLayout  
-                  Grid.Column="2"
-                  Orientation="Horizontal"
-                  HorizontalOptions="Center">
-                    <Label
-                        Text="SETTINGS"/>
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Command="{Binding SettingsCommand}"
-                            NumberOfTapsRequired="1" />
-                    </StackLayout.GestureRecognizers>
-                </StackLayout>
             </Grid>
             <!-- INFO -->
             <Label

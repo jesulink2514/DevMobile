@@ -24,10 +24,7 @@ namespace eShopOnContainers.Services
 
         public Task InitializeAsync()
         {
-            if(string.IsNullOrEmpty(Settings.AuthAccessToken))
-                return NavigateToAsync<LoginViewModel>();
-            else
-                return NavigateToAsync<MainViewModel>();
+            return NavigateToAsync<MainViewModel>();
         }
 
         public Task NavigateToAsync<TViewModel>() where TViewModel : ViewModelBase
