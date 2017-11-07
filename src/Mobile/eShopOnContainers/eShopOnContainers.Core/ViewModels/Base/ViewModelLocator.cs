@@ -51,7 +51,6 @@ namespace eShopOnContainers.Core.ViewModels.Base
             builder.RegisterType<CampaignViewModel>();
             builder.RegisterType<CampaignDetailsViewModel>();
 
-            // Services
             builder.RegisterType<NavigationService>().As<INavigationService>().SingleInstance();
             builder.RegisterType<DialogService>().As<IDialogService>();
             builder.RegisterType<OpenUrlService>().As<IOpenUrlService>();
@@ -59,7 +58,7 @@ namespace eShopOnContainers.Core.ViewModels.Base
             builder.RegisterType<RequestProvider>().As<IRequestProvider>();
             builder.RegisterType<LocationService>().As<ILocationService>().SingleInstance();
 
-
+            // Services
             builder.RegisterInstance(new CatalogMockService()).As<ICatalogService>();
             builder.RegisterInstance(new BasketMockService()).As<IBasketService>();
             builder.RegisterInstance(new OrderMockService()).As<IOrderService>();
