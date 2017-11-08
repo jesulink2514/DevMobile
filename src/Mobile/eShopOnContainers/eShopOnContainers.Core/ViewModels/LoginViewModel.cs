@@ -1,6 +1,5 @@
 ﻿using eShopOnContainers.Core.Helpers;
 using eShopOnContainers.Core.Models.User;
-using eShopOnContainers.Core.Services.Identity;
 using eShopOnContainers.Core.Services.OpenUrl;
 using eShopOnContainers.Core.Validations;
 using eShopOnContainers.Core.ViewModels.Base;
@@ -23,14 +22,11 @@ namespace eShopOnContainers.Core.ViewModels
         private string _authUrl;
 
         private IOpenUrlService _openUrlService;
-        private IIdentityService _identityService;
 
         public LoginViewModel(
-            IOpenUrlService openUrlService,
-            IIdentityService identityService)
+            IOpenUrlService openUrlService)
         {
             _openUrlService = openUrlService;
-            _identityService = identityService;
 
             _userName = new ValidatableObject<string>();
             _password = new ValidatableObject<string>();
@@ -188,8 +184,6 @@ namespace eShopOnContainers.Core.ViewModels
 
             await Task.Delay(500);
 
-            LoginUrl = _identityService.CreateAuthorizationRequest();
-
             IsValid = true;
             IsLogin = true;
             IsBusy = false;
@@ -203,13 +197,6 @@ namespace eShopOnContainers.Core.ViewModels
         private void Logout()
         {
             var authIdToken = Settings.AuthIdToken;
-            var logoutRequest = _identityService.CreateLogoutRequest(authIdToken);
-
-            if (!string.IsNullOrEmpty(logoutRequest))
-            {
-                // Logout
-                LoginUrl = logoutRequest;
-            }
 
             if (Settings.UseMocks)
             {
@@ -229,23 +216,12 @@ namespace eShopOnContainers.Core.ViewModels
                 Settings.AuthAccessToken = string.Empty;
                 Settings.AuthIdToken = string.Empty;
                 IsLogin = false;
-                LoginUrl = _identityService.CreateAuthorizationRequest();
             }
             else if (unescapedUrl.Contains(GlobalSetting.Instance.IdentityCallback))
             {
                 var authResponse = new AuthorizeResponse(url);
                 if (!string.IsNullOrWhiteSpace(authResponse.Code))
                 {
-                    var userToken = await _identityService.GetTokenAsync(authResponse.Code);
-                    string accessToken = userToken.AccessToken;
-
-                    if (!string.IsNullOrWhiteSpace(accessToken))
-                    {
-                        Settings.AuthAccessToken = accessToken;
-                        Settings.AuthIdToken = authResponse.IdentityToken;
-                        await NavigationService.NavigateToAsync<MainViewModel>();
-                        await NavigationService.RemoveLastFromBackStackAsync();
-                    }
                 }
             }
         }
