@@ -3,7 +3,6 @@ using eShopOnContainers.Core.Models.User;
 using eShopOnContainers.Core.Services.OpenUrl;
 using eShopOnContainers.Core.Validations;
 using eShopOnContainers.Core.ViewModels.Base;
-using IdentityModel.Client;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -219,10 +218,6 @@ namespace eShopOnContainers.Core.ViewModels
             }
             else if (unescapedUrl.Contains(GlobalSetting.Instance.IdentityCallback))
             {
-                var authResponse = new AuthorizeResponse(url);
-                if (!string.IsNullOrWhiteSpace(authResponse.Code))
-                {
-                }
             }
         }
 
