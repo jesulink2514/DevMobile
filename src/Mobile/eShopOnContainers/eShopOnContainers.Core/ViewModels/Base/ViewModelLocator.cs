@@ -55,7 +55,7 @@ namespace eShopOnContainers.Core.ViewModels.Base
             builder.RegisterType<LocationService>().As<ILocationService>().SingleInstance();
 
             // Services
-            builder.RegisterInstance(new CatalogMockService()).As<ICatalogService>();
+            builder.RegisterInstance(new CatalogService()).As<ICatalogService>();
             builder.RegisterInstance(new BasketMockService()).As<IBasketService>();
             builder.RegisterInstance(new OrderMockService()).As<IOrderService>();
             builder.RegisterInstance(new UserMockService()).As<IUserService>();

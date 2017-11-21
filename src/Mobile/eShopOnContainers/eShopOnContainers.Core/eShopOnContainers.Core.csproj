@@ -61,6 +61,8 @@
     <Compile Include="Helpers\RandomNumberGenerator.cs" />
     <Compile Include="Helpers\ServicesHelper.cs" />
     <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="Services\Catalog\CatalogService.cs" />
+    <Compile Include="Services\Constants.cs" />
     <Compile Include="Views\Templates\BasketItemTemplate.xaml.cs">
       <DependentUpon>BasketItemTemplate.xaml</DependentUpon>
     </Compile>
