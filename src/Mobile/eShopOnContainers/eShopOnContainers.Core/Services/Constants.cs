@@ -2,6 +2,6 @@
 {
     public class Constants
     {
-        public const string BaseUrl = "REPLACE_YOUR_BASE_URL";
+        public const string BaseUrl = "http://192.168.1.41:9090";
     }
 }

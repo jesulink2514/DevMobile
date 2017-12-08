@@ -59,7 +59,7 @@ namespace eShopOnContainers.Core.Services.Order
 			new OrderItem { OrderId = Guid.NewGuid(), ProductId = Common.Common.MockCatalogItemId03, Discount = 0, ProductName = ".NET Bot Black Sweatshirt (M)", Quantity = 2, UnitPrice = 19.95M, PictureUrl = Device.RuntimePlatform != "Windows" ? "fake_product_03.png" : "Assets/fake_product_03.png" }
         };
 
-        private static List<CardType> MockCardTypes = new List<CardType>()
+        public static List<CardType> MockCardTypes = new List<CardType>()
         {
             new CardType { Id = 1, Name = "Amex" },
             new CardType { Id = 2, Name = "Visa" },

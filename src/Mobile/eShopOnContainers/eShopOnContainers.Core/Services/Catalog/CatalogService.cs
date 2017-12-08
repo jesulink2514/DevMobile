@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using eShopOnContainers.Core.Models.Catalog;
@@ -10,17 +8,8 @@ using Newtonsoft.Json;
 
 namespace eShopOnContainers.Core.Services.Catalog
 {
-    public class CatalogService : ICatalogService
+    public class CatalogService : ServiceBase, ICatalogService
     {
-        private readonly HttpClient _httpClient;
-
-        public CatalogService()
-        {
-            _httpClient = new HttpClient()
-            {
-                BaseAddress = new Uri(Constants.BaseUrl)
-            };
-        }
         public async Task<ObservableCollection<CatalogBrand>> GetCatalogBrandAsync()
         {
             var json = await _httpClient.GetStringAsync("/api/catalog/brands");
