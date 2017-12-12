@@ -1,10 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using eShopOnContainers.Core.ViewModels.Base;
 using System.Collections.ObjectModel;
+using System.Net;
+using System.Net.Http;
 using Xamarin.Forms;
 using eShopOnContainers.Core.Models.Catalog;
 using eShopOnContainers.Core.Services.Catalog;
 using System.Windows.Input;
+using eShopOnContainers.Core.Helpers;
 
 namespace eShopOnContainers.Core.ViewModels
 {
@@ -87,9 +91,31 @@ namespace eShopOnContainers.Core.ViewModels
             IsBusy = true;
 
             // Get Catalog, Brands and Types
-            Products = await _productsService.GetCatalogAsync();
-            Brands = await _productsService.GetCatalogBrandAsync();
-            Types = await _productsService.GetCatalogTypeAsync();
+            try
+            {
+                Products = await _productsService.GetCatalogAsync();
+                Brands = await _productsService.GetCatalogBrandAsync();
+                Types = await _productsService.GetCatalogTypeAsync();
+            }
+            catch (HttpRequestException e)
+            {
+                var message = string.Empty;
+
+                if (e.InnerException is WebException wex)
+                {
+                    message = wex.Status.ToMessage();
+                }
+                else
+                {
+                    message = "An error ocurred trying to connect to Catalog services";
+                }
+
+                await DialogService.ShowAlertAsync(message, "Services", "Ok");
+            }
+            catch
+            {
+                await DialogService.ShowAlertAsync("Oops!There was a problem.", "Services", "Ok");
+            }
 
             IsBusy = false;
         }
